@@ -1,0 +1,39 @@
+<div class="page-wrapper chiller-theme toggled">
+  <app-sidebar *ngIf="showHead"></app-sidebar>
+  <!-- sidebar-wrapper  -->
+  <main class="" [ngClass]="{'page-content': showHead }">
+      <nav class="navbar navbar-expand-lg fixed-top" *ngIf="currentUser">
+      
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav ml-auto pull-right">
+                  
+                  <li class="nav-item dropdown" ngbDropdown>
+                      <a class="nav-link line49" ngbDropdownToggle>
+                          <i class="fa fa-user" style="top:0px;"></i> Welcome {{currentUser.firstName}} {{currentUser.lastName}}!
+                      </a>
+                  </li>
+                  <li class="nav-item dropdown" ngbDropdown>
+                      <div class="mt-1" ngbDropdownMenu>
+                          <a class="dropdown-item" (click)="refresh()">
+                              <i class="fa fa-heartbeat"></i> {{'Refresh'}}
+                          </a>
+                      </div>
+                  </li>
+                  <li class="nav-item dropdown" ngbDropdown>
+                      <div class="mt-1" ngbDropdownMenu>
+                          <a class="dropdown-item" [routerLink]="['/login']" (click)="logout()">
+                            <i class="fa fa-fw fa-power-off"></i> {{'Log Out'}}
+                        </a> 
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+    <router-outlet></router-outlet>
+    
+  </main>
+  <footer class="site-footer text-center" *ngIf="showHead">
+      © 2019 Jenkins UI - HP Internal and Confidential
+  </footer>
+  <!-- page-content" -->
+</div>

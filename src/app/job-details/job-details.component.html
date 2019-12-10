@@ -1,0 +1,99 @@
+<div class="row m-0 border-btm" *ngIf="jobDetails && buildDetails">
+  <div class="col-md-4">
+    <h5 class="page-title">
+      <button class="btn btn-white" [routerLink]="['/dashboard']">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      Job Details</h5>
+  </div>
+</div>
+
+<div class="row" *ngIf="job">
+  <div class="detail-top-part">
+      <div class="job-head">
+        <div class="icon-shape-md">
+          {{job.name.substring(0,2).toUpperCase()}}
+        </div>
+
+        <div class="flex-1">
+          <h5>{{job.name}}<img src="../../assets/images/{{job.healthReport[0].iconUrl}}" title="Stable" width="32px"></h5>
+          <div class="disflex">
+            <!-- <h4 class="badge badge-success mb-0">
+                New
+            </h4> -->
+            <div class="build-num" *ngIf="job.lastBuild">
+                <dt>Last Build:</dt>
+                <dd>#{{job.lastBuild.number}} &nbsp;&nbsp;&nbsp;</dd> 
+                <dt>On:</dt>
+                <dd>{{job.lastBuild.timestamp | date}}&nbsp;&nbsp;&nbsp;</dd> 
+                <dt>Duration:</dt>
+                <dd>{{job.lastBuild.duration}} secs &nbsp;&nbsp;&nbsp;</dd>
+                <dt>Result:</dt>
+                <dd>{{job.lastBuild.result}}&nbsp;&nbsp;&nbsp;&nbsp; </dd>
+                <dt *ngIf="nextRunTime">Next Run Time:</dt>
+                <dd>{{nextRunTime  | date:'medium' }}</dd>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="disflex align-right" *ngIf="!currentUser.isReadonly">
+            <button class="btn btn-primary btn-lg" 
+            (click) = "buildJob(job.name)">
+              Build
+            </button>
+        </div> 
+          </div>
+          
+        </div>
+      </div>
+      <div class="job-body">
+        <div class="row" *ngIf="job.lastSuccessfulBuild">
+          <div class="col">
+            <dt>Last Successful Build</dt>
+            <dd>{{job.lastSuccessfulBuild.number}}</dd>
+          </div>
+          <div class="col">
+            <dt>Last Successful Build Time</dt>
+            <dd>{{job.lastSuccessfulBuild.timestamp | date}}</dd>
+          </div>
+          <div class="col">
+              <dt>Last Successful Build Duration</dt>
+              <dd>{{job.lastSuccessfulBuild.duration}} secs</dd>
+            </div>
+          <div class="col">
+              <dt>Last Successful Build Result:</dt>
+              <dd>{{job.lastSuccessfulBuild.result}}</dd>
+          </div>
+        </div>
+        <div class="row" *ngIf="job.lastUnsuccessfulBuild">
+            <div class="col">
+              <dt>Last UnSuccessful Build</dt>
+              <dd>{{job.lastUnsuccessfulBuild.number}}</dd>
+            </div>
+            <div class="col">
+              <dt>Last UnSuccessful Build Time</dt>
+              <dd>{{job.lastUnsuccessfulBuild.timestamp | date}}</dd>
+            </div>
+            <div class="col">
+                <dt>Last UnSuccessful Build Duration</dt>
+                <dd>{{job.lastUnsuccessfulBuild.duration}} secs</dd>
+              </div>
+            <div class="col">
+                <dt>Last UnSuccessful Build Result:</dt>
+                <dd>{{job.lastUnsuccessfulBuild.result}}</dd>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="job-desk">
+  <div class="console-nav">
+      <button class="btn btn-nav btn-nav-left" (click) = "previousBuild()" tooltip="Previous" placement="top" delay="500">
+          <i class="fa fa-angle-left"></i>
+        </button>
+        <button class="btn btn-nav btn-nav-right" (click) = "nextBuild()" tooltip="Next" placement="top" delay="500">
+            <i class="fa fa-angle-right"></i>
+          </button>
+  </div>
+  <div class="col-12 mt-4" *ngIf="consoleLog">
+    <h5 class="pb-3">Console Log for Build# {{jobDetails.builds[counter].number}} </h5>
+    <div class="table table-striped" innerHTML={{consoleLog}}>  </div>
+</div>
