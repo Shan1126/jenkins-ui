@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8081/api/v1/jenkins/jobs/'
+  apiUrl: 'http://jx-devops-automation.jx.acnhpi.com:8081'
 };

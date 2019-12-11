@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
+import jobsData from '../data/jobs.json';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -35,10 +37,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllJobs() {
-    this.appService.getAllJobs().subscribe((response) => {
-      this.jobs = response.jobs;
-      this.getJobDetails();
-    })
+    // this.appService.getAllJobs().subscribe({
+    //   next: res => {
+    //     this.jobs = res.jobs;
+    //     this.getJobDetails();
+    //   }
+    // })
+    // console.log('Jobs from json file: ' + JSON.stringify(jobsData.jobs));
+    this.jobs = jobsData.jobs;
+
   }
 
   getJobDetails() {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
@@ -31,7 +30,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 url: this.apiUrl +  request.url
             });
         }
-        
         return next.handle(request);
     }
 }

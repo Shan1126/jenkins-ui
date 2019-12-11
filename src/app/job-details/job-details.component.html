@@ -94,6 +94,6 @@
           </button>
   </div>
   <div class="col-12 mt-4" *ngIf="consoleLog">
-    <h5 class="pb-3">Console Log for Build# {{jobDetails.builds[counter].number}} </h5>
+    <h5 class="pb-3">Console Log for Build# {{jobDetails && jobDetails.builds[counter].number ? jobDetails.builds[counter].number : '111'}} </h5>
     <div class="table table-striped" innerHTML={{consoleLog}}>  </div>
 </div>

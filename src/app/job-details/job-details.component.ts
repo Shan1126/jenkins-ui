@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AppService } from "../app.service";
 import { ToastrService } from 'ngx-toastr';
+import consoleData from '../data/console.json';
 import {
   ActivatedRoute,
   Router,
@@ -89,10 +90,12 @@ export class JobDetailsComponent implements OnInit {
     this.appService.getJobsByName(this.job.name).subscribe(response => {
       this.jobDetails = response;
       //console.log(`Job details for : ${job.name}: ${JSON.stringify(response)}`);
-      if (this.jobDetails.builds) {
+      if (this.jobDetails && this.jobDetails.builds) {
         this.getBuildDetails();
         this.getConsolelog();
       }
+
+      this.getConsolelog();
     });
   }
 
@@ -106,8 +109,10 @@ export class JobDetailsComponent implements OnInit {
   }
 
   getConsolelog() {
-    this.appService.getConsoleLog(this.jobName, this.jobDetails.builds[this.counter].number).subscribe(res => {
-        this.consoleLog = res.data;
-      });
+    // this.appService.getConsoleLog(this.jobName, this.jobDetails.builds[this.counter].number).subscribe(res => {
+    //     this.consoleLog = res.data;
+    //   });
+    // console.log('Console log from json file: ' + JSON.stringify(consoleData));
+    this.consoleLog = consoleData.data;
   }
 }

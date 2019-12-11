@@ -116,7 +116,7 @@
           <div class="flex-1">
             <a (click) = "navigateToJob(j.name)"><h5>{{j.name}}</h5> </a>
           </div>
-          <div>
+          <div *ngIf="j.healthReport[0]">
               <img src="../../assets/images/{{j.healthReport[0].iconUrl}}" title="Stable" class="mr-2" width="25px">
               <!-- <h6 class="badge badge-success">
                 New
