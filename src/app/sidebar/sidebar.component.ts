@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
+import jobsData from '../data/jobs.json';
+
 
 @Component({
   selector: "app-sidebar",
@@ -29,9 +31,10 @@ export class SidebarComponent implements OnInit {
   }
 
   getAllJobs() {
-    this.appService.getAllJobs().subscribe(response => {
-      this.jobs = response.jobs;
-    });
+    // this.appService.getAllJobs().subscribe(response => {
+    //   this.jobs = response.jobs;
+    // });
+    this.jobs = jobsData.jobs;
   }
   navigateToJob(index) {
     const job = this.jobs[index];
