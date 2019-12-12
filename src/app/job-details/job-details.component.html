@@ -51,7 +51,7 @@
               <img src="../../assets/images/{{job.healthReport[0].iconUrl}}" title="Stable" width="32px">
           </div>
             <button class="btn btn-primary btn-lg" 
-            (click) = "buildJob(job.name)">
+            (click)="confirmBuild(job.name)" >
             <i class="fas fa-hammer mr-2"></i>
               Build
             </button>
@@ -110,3 +110,29 @@
     <h5 class="pb-3">Console Log for Build# {{jobDetails && jobDetails.builds[counter].number ? jobDetails.builds[counter].number : '111'}} </h5>
     <div class="table table-striped" innerHTML={{consoleLog}}>  </div>
 </div>
+
+<div class="modal disblock" *ngIf="confirmdialogue" id="myModal">
+  <div class="modal-dialog show">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Confirmation</h4>
+        <button type="button" (click)="confirmdialogue = false" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+          Are you sure you want to build?
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="confirmdialogue = false">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="buildJob()">Yes Proceed</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop show" *ngIf="confirmdialogue"></div>

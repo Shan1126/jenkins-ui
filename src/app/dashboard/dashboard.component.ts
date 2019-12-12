@@ -15,10 +15,13 @@ import { AuthenticationService } from '../shared/services';
 export class DashboardComponent implements OnInit {
   jobs: any = [];
   jobDetails: any = [];
-  filterStr: string;
   nextRunTimes: any = [];
   buildDetails: any = [];
   currentUser: User;
+  p: number = 1;
+  filterStr;
+  jobToBuild;
+  confirmdialogue : boolean = false;
   currentUserSubscription: Subscription;
   constructor(private appService: AppService,
     private toastr: ToastrService, public router: Router,
@@ -39,14 +42,14 @@ export class DashboardComponent implements OnInit {
   getAllJobs() {
     this.appService.getJobsData().subscribe({
       next: res => {
-        this.jobs = res.jobs;
+        this.jobs = res;
         this.getJobDetails();
       }
     })
   }
 
   getJobDetails() {
-    this.jobs.forEach((job, index) => {
+    this.jobs.jobs.forEach((job, index) => {
       this.appService.getJobsByName(job.name).subscribe((response) => {
         this.jobDetails[index] = response;
         if (job.builds) this.getBuildDetails(job.name, job.builds[0].number, index);
@@ -60,7 +63,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   navigateToJob(index) {
-    const job = this.jobs[index];
+    const job = this.jobs.jobs[index];
     this.appService.jobData = job;
     this.router.navigate(["/job-details/" + job.name]);
   }
@@ -77,14 +80,22 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  buildJob(name) {
+  closemodal(){
+    this.confirmdialogue = false;
+  }
+
+  buildJob() {
+    this.confirmdialogue = false;
     if (!this.currentUser.isReadonly) {
-      if (confirm('Are you sure you want to build?')) {
-        this.appService.buildJob(name).subscribe((response) => {
+        this.appService.buildJob(this.jobToBuild).subscribe((response) => {
           this.toastr.success('Build has been started successfully!');
-        });
-      }
+        }); 
     }
+  }
+  confirmBuild(name) {
+    this.confirmdialogue = true;
+    this.jobToBuild = name;
+
   }
 
   getSampleJobDetails(jobName, index) {
@@ -93,9 +104,30 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  filterJobs(str) {
-    const newArray = this.jobs.filter(j => j.name === str);
-    this.jobs = newArray;
+  filterJobs(event) {
+    var str = event.target.value;
+    if(str && str.length >= 1) {
+
+      console.log('Inside: string> 1');
+      const newArray = this.jobs.jobs.filter(j => j.name.includes(str));
+      this.jobs.jobs = newArray;
+    } else {
+      console.log('Inside: else');
+      this.getAllJobs();
+    }
   }
 
+  filterByKeyword(keyword: string) {
+    const k = keyword.toLowerCase();
+    this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
+    this.jobs.jobs = this.jobs.jobs.filter((category) => {
+        category.products = category.products.filter(
+          (product)=> product.name.toLowerCase().includes(k));
+
+        return category.products.length>0 }
+      );
+    if(this.jobs.jobs.length===0){
+      this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
+    }
+  }
 }

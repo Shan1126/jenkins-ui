@@ -14,6 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { TooltipDirective } from './custom-ui/tooltip.directive';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { TooltipDirective } from './custom-ui/tooltip.directive';
     BrowserAnimationsModule,
     AppRoutingModule,
     BrowserModule,
+    NgxPaginationModule,
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({

@@ -20,6 +20,8 @@ import { AuthenticationService } from '../shared/services';
 export class JobDetailsComponent implements OnInit {
   jobName;
   jobDetails;
+  jobToBuild;
+  confirmdialogue : boolean = false;
   job;
   buildDetails;
   consoleLog;
@@ -62,14 +64,24 @@ export class JobDetailsComponent implements OnInit {
     }
   }
 
-  buildJob(name) {
+ 
+
+  closemodal(){
+    this.confirmdialogue = false;
+  }
+
+  buildJob() {
+    this.confirmdialogue = false;
     if (!this.currentUser.isReadonly) {
-      if (confirm('Are you sure you want to build?')) {
-        this.appService.buildJob(name).subscribe((response) => {
+        this.appService.buildJob(this.jobToBuild).subscribe((response) => {
           this.toastr.success('Build has been started successfully!');
-        });
-      }
+        }); 
     }
+  }
+  confirmBuild(name) {
+    this.confirmdialogue = true;
+    this.jobToBuild = name;
+
   }
 
 

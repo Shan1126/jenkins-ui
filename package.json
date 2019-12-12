@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "http": "0.0.0",
     "i": "^0.3.6",
+    "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^8.5.0",
     "npm": "^6.13.2",
     "path": "^0.12.7",
@@ -44,6 +45,7 @@
     "stylelint-scss": "^3.13.0",
     "tslib": "^1.9.0",
     "tslint-config-prettier": "^1.18.0",
+    "underscore": "^1.9.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

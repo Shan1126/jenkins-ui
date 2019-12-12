@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AppService } from './app.service';
+import { Router, NavigationStart } from '@angular/router';
 import { AuthenticationService } from './shared/services';
 import { User } from './_models';
 import { Subscription } from 'rxjs';
@@ -15,6 +16,7 @@ export class AppComponent {
   jobDetails: any = [];
   buildDetails: any = [];
   showHead: boolean = false;
+  newsShow: boolean = false;
   currentUser: User;
   currentUserSubscription: Subscription;
 
@@ -32,6 +34,10 @@ export class AppComponent {
   }
 
   ngOnInit() {}
+
+  openNews(){
+    this.newsShow = !this.newsShow;
+  }
 
   refresh() {
     window.location.reload();
