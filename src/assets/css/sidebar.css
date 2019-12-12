@@ -42,6 +42,7 @@
     font-size: 0.9rem;
     color: #090C39;
   }
+  .sidebar-wrapper{z-index: 999999999;}
   .page-wrapper .sidebar-wrapper,
   .sidebar-wrapper .sidebar-brand > a,
   .sidebar-wrapper .sidebar-dropdown > a:after,
@@ -82,6 +83,7 @@
   
   .page-wrapper.toggled .sidebar-wrapper {
     left: 0px;
+    z-index: 9999999999999;
   }
   
   @media screen and (min-width: 768px) {
@@ -127,8 +129,8 @@
   /*----------------sidebar-content----------------*/
   
   .sidebar-content {
-    max-height: calc(100% - 30px);
-    height: calc(100% - 30px);
+    max-height: calc(100% - 0px);
+    height: calc(100% - 0px);
     overflow-y: auto;
     position: relative;
   }
@@ -225,6 +227,7 @@
     text-decoration: none;
     position: relative;
     padding: 8px 30px 8px 20px;
+    cursor: pointer;
   }
   
   .sidebar-wrapper .sidebar-menu ul li a i {

@@ -1,182 +1,230 @@
-<div class="page-header">
-  <div class="row m-0 border-btm">
-    <div class="col-md-4">
-      <h5 class="page-title">Jenkins Jobs - Dashboard</h5>
+<div class="page-header pt50" *ngIf="currentUser">
+    <div class="row m-0 border-btm">
+       <div class="col-md-6">
+          <h5 class="page-title">Jenkins Jobs - Dashboard</h5>
+       </div>
+       <div class="col-md-6 text-right">
+       </div>
     </div>
- 
-    <div class="col-md-8 text-right">
-      
+    <div>
+       <div class="row m-0 pt-3 pb-3">
+          <div class="col-xl-3 col-lg-6">
+             <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                   <div class="row">
+                      <div class="col">
+                         <h5 class="card-title text-muted mb-1">No. of Jobs</h5>
+                         <span class="h2 font-weight-bold mb-0">19</span>
+                      </div>
+                      <div class="col-auto">
+                         <div class="icon icon-shape bg-tomato text-white rounded-circle ">
+                            <i class="fas fa-tools"></i>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                      <span class="text-nowrap">Since last month</span>
+                   </p>
+                </div>
+             </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+             <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                   <div class="row">
+                      <div class="col">
+                         <h5 class="card-title text-muted mb-1">Successful builds</h5>
+                         <span class="h2 font-weight-bold mb-0">243</span>
+                      </div>
+                      <div class="col-auto">
+                         <div class="icon icon-shape bg-orange text-white rounded-circle ">
+                            <i class="fas fa-hammer"></i>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                      <span class="text-nowrap">Since last week</span>
+                   </p>
+                </div>
+             </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+             <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                   <div class="row">
+                      <div class="col">
+                         <h5 class="card-title text-muted mb-1">Failures</h5>
+                         <span class="h2 font-weight-bold mb-0">4</span>
+                      </div>
+                      <div class="col-auto">
+                         <div class="icon icon-shape bg-yellow text-white rounded-circle ">
+                            <i class="fas fa-frown-open"></i>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                      <span class="text-nowrap">Since yesterday</span>
+                   </p>
+                </div>
+             </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+             <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                   <div class="row">
+                      <div class="col">
+                         <h5 class="card-title text-muted mb-1">Overall Weather</h5>
+                         <span class="h2 font-weight-bold mb-0">49.65%</span>
+                      </div>
+                      <div class="col-auto">
+                         <div class="icon icon-shape bg-info text-white rounded-circle ">
+                            <i class="fas fa-cloud-sun-rain"></i>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                      <span class="text-nowrap">Since last month</span>
+                   </p>
+                </div>
+             </div>
+          </div>
+       </div>
     </div>
-  </div>
+    <!-- jobs list -->
+    <div class="row m-0" *ngIf="jobs">
+       <div class="col-12 mt-3">
+          <div class="sec-title after-line">All Builds</div>
 
-  <!-- <div>
-    <div class="row m-0 pt-3 pb-3">
-      <div class="col-xl-3 col-lg-6">
-        <div class="card card-stats mb-4 mb-xl-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-muted mb-1">No. of Jobs</h5>
-                <span class="h2 font-weight-bold mb-0">19</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-tomato text-white rounded-circle ">
-                  <i class="fas fa-tools"></i>
+          <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active">
+                <span class="page-link">
+                  2
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+       </div>
+       <div class="col-md-12 col-lg-12 job-lists" *ngFor="let i=index; let j of jobs;">
+          <div class="card job-pad">
+             <div class="job-head">
+                <div class="icon-shape-md" >
+                   <a (click) = "navigateToJob(j.name)">
+                   {{j.name? j.name.substring(0,2).toUpperCase(): ''}}
+                   </a>
                 </div>
-              </div>
-            </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-6">
-        <div class="card card-stats mb-4 mb-xl-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-muted mb-1">Successful builds</h5>
-                <span class="h2 font-weight-bold mb-0">243</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-orange text-white rounded-circle ">
-                  <i class="fas fa-hammer"></i>
+                <div class="flex-1">
+                   <a (click) = "navigateToJob(j.name)">
+                      <h5>{{j.name}}</h5>
+                   </a>
                 </div>
-              </div>
-            </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-              <span class="text-nowrap">Since last week</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-6">
-        <div class="card card-stats mb-4 mb-xl-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-muted mb-1">Failures</h5>
-                <span class="h2 font-weight-bold mb-0">4</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-yellow text-white rounded-circle ">
-                  <i class="fas fa-frown-open"></i>
+                <div *ngIf="j.healthReport[0]">
+                    <img src="../../assets/images/{{j.healthReport[0].iconUrl}}" title="Stable" class="mr-2" width="25px">
+                    <!-- <h6 class="badge badge-success">
+                       New
+                       </h6> -->
+                 </div>
+                <div class="ml-2">
+                    <button class="btn btn-outline-light mr-2" (click)="navigateToJob(i)"><i class="far fa-eye mr-1"></i> View</button>
+                    <button class="btn btn-primary" (click)="buildJob(j.name)" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i> Build</button>
+                 </div>
+                
+             </div>
+             <div class="job-body pt-0">
+                <div class="row">
+                   <div class="col-md-12 col-lg-12" *ngIf="j.lastSuccessfulBuild">
+                      <div class="row success-builds">
+                         <dl class="col-md-6 col-lg-3">
+                            <dt>Last Successful Build:</dt>
+                            <dd>#{{j.lastSuccessfulBuild.number}} </dd>
+                         </dl>
+                         <dl class="col-md-6 col-lg-3">
+                            <dt>On:</dt>
+                            <dd>{{j.lastSuccessfulBuild.timestamp | date}}</dd>
+                         </dl>
+                         <dl class="col-md-6 col-lg-3">
+                            <dt>Duration:</dt>
+                            <dd>{{j.lastSuccessfulBuild.duration}} secs</dd>
+                         </dl>
+                         <dl class="col-md-6 col-lg-3">
+                            <dt>Result:</dt>
+                            <dd>{{j.lastSuccessfulBuild.result}}</dd>
+                         </dl>
+                      </div>
+                   </div>
+                   <div class="col-md-12 col-lg-12" *ngIf="j.lastUnsuccessfulBuild">
+                      <div class="row unsuccess-builds">
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Last Unsuccessful Build:</dt>
+                            <dd>#{{j.lastUnsuccessfulBuild.number}}</dd>
+                          </dl> 
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>On:</dt>
+                            <dd>{{j.lastUnsuccessfulBuild.timestamp | date}}</dd>
+                          </dl>
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Duration:</dt>
+                            <dd>{{j.lastUnsuccessfulBuild.duration}} secs</dd>
+                          </dl>
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Result:</dt>
+                            <dd>{{j.lastUnsuccessfulBuild.result}}</dd>
+                          </dl>
+                      </div>
+                   </div>
+                   <div class="col-md-12 col-lg-12" *ngIf="j.lastBuild">
+                      <div class="row info-builds">
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Last Build:</dt>
+                            <dd>#{{j.lastBuild.number}} </dd>
+                          </dl>
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>On:</dt>
+                            <dd>{{j.lastBuild.timestamp | date}}</dd>
+                          </dl>
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Duration:</dt>
+                            <dd>{{j.lastBuild.duration}} secs</dd>
+                          </dl>
+                          <dl class="col-md-6 col-lg-3">
+                            <dt>Result:</dt>
+                            <dd>{{j.lastBuild.result}}</dd>
+                          </dl>
+                      </div>
+                   </div>
+                   <div class="col-12 mt-2">
+                     <dl class="p-10 mb-0">
+                        <dt>Description: </dt>
+                        <dd class="twoliner">{{j.description}}</dd>
+                      </dl>
+                   </div>
                 </div>
-              </div>
-            </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-              <span class="text-nowrap">Since yesterday</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-6">
-        <div class="card card-stats mb-4 mb-xl-0">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-muted mb-1">Overall Weather</h5>
-                <span class="h2 font-weight-bold mb-0">49.65%</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-info text-white rounded-circle ">
-                  <i class="fas fa-cloud-sun-rain"></i>
+             </div>
+             <div class="job-footer" *ngIf="nextRunTimes[i]">
+                <div class="flex-1">
+                   <div class="row m-0">
+                      <div class="ml-0">
+                         <dt>Next Evaluation:</dt>
+                         <dd class="mt-1"><i class="far fa-calendar mr-1"></i>{{nextRunTimes[i] | date:'medium' }}</dd>
+                      </div>
+                   </div>
                 </div>
-              </div>
-            </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-              <span class="text-nowrap">Since last month</span>
-            </p>
+                
+             </div>
           </div>
-        </div>
-      </div>
+       </div>
     </div>
-  </div> -->
-
-
-  <!-- jobs list -->
-  <div class="row m-0" *ngIf="jobs">
-    <div class="col-12">
-      <div class="sec-title"></div>
-    </div>
-    <div class="col-md-6 col-lg-6 job-lists" *ngFor="let i=index; let j of jobs;">
-      <div class="card job-pad">
-        <div class="job-head">
-          <div class="icon-shape-md" >
-          <a (click) = "navigateToJob(j.name)">
-            {{j.name? j.name.substring(0,2).toUpperCase(): ''}}
-        </a>
-            
-      </div>
-          <div class="flex-1">
-            <a (click) = "navigateToJob(j.name)"><h5>{{j.name}}</h5> </a>
-          </div>
-          <div *ngIf="j.healthReport[0]">
-              <img src="../../assets/images/{{j.healthReport[0].iconUrl}}" title="Stable" class="mr-2" width="25px">
-              <!-- <h6 class="badge badge-success">
-                New
-              </h6> -->
-            </div>
-        </div>
-        <div class="job-body">
-          <div class="row">
-            <div class="col-md-6 col-lg-4" *ngIf="j.lastSuccessfulBuild">
-                <dt>Last Successful Build:</dt>
-                <dd>#{{j.lastSuccessfulBuild.number}} 
-                <dt>On:</dt>
-                <dd>{{j.lastSuccessfulBuild.timestamp | date}}</dd>
-                <dt>Duration:</dt>
-                <dd>{{j.lastSuccessfulBuild.duration}} secs</dd>
-                <dt>Result:</dt>
-                <dd>{{j.lastSuccessfulBuild.result}}</dd>
-            </div>
-            <div class="col-md-6 col-lg-4" *ngIf="j.lastUnsuccessfulBuild">
-                <dt>Last Unsuccessful Build:</dt>
-                <dd>#{{j.lastUnsuccessfulBuild.number}} 
-                <dt>On:</dt>
-                <dd>{{j.lastUnsuccessfulBuild.timestamp | date}}</dd>
-                <dt>Duration:</dt>
-                <dd>{{j.lastUnsuccessfulBuild.duration}} secs</dd>
-                <dt>Result:</dt>
-                <dd>{{j.lastUnsuccessfulBuild.result}}</dd>
-            </div>
-
-            <div class="col-md-6 col-lg-4" *ngIf="j.lastBuild">
-                <dt>Last Build:</dt>
-                <dd>#{{j.lastBuild.number}} 
-                <dt>On:</dt>
-                <dd>{{j.lastBuild.timestamp | date}}</dd>
-                <dt>Duration:</dt>
-                <dd>{{j.lastBuild.duration}} secs</dd>
-                <dt>Result:</dt>
-                <dd>{{j.lastBuild.result}}</dd>
-            </div>
-            <div class="col-12 mt-2">
-              <dt>Description: </dt>
-              <dd class="twoliner">{{j.description}}</dd>
-            </div>
-          </div>
-        </div>
-        <div class="job-footer">
-          <div class="flex-1">
-              <div class="row m-0">
-                <div class="ml-0" *ngIf="nextRunTimes[i]">
-                  <dt>Next Evaluation:</dt>
-                  <dd class="mt-1"><i class="far fa-calendar mr-1"></i>{{nextRunTimes[i] | date:'medium' }}</dd>
-                </div>
-              </div>
-          </div>
-          <div>
-            <button class="btn btn-primary" (click)="navigateToJob(i)">View</button> &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" (click)="buildJob(j.name)" *ngIf="!currentUser.isReadonly">Build</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+ </div>

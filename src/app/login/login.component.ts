@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.authenticationService
-    //   .login(this.model.username, this.model.password)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.router.navigate(["/"], { relativeTo: this.route });
-    //     },
-    //     error => {
-    //       this.errorMessage = "Invalid username or password. Please try again!";
-    //     }
-    //   );
+    this.authenticationService
+      .login(this.model.username, this.model.password)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(["/"], { relativeTo: this.route });
+        },
+        error => {
+          this.errorMessage = "Invalid username or password. Please try again!";
+        }
+      );
 
     this.authenticationService
       .login(this.model.username, this.model.password) 

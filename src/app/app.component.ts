@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from './app.service';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from './shared/services';
 import { User } from './_models';
 import { Subscription } from 'rxjs';

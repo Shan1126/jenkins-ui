@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="job">
+<div class="row pt35" *ngIf="job">
   <div class="detail-top-part">
       <div class="job-head">
         <div class="icon-shape-md">
@@ -16,36 +16,49 @@
         </div>
 
         <div class="flex-1">
-          <h5>{{job.name}}<img src="../../assets/images/{{job.healthReport[0].iconUrl}}" title="Stable" width="32px"></h5>
+          <h5>{{job.name}}</h5>
           <div class="disflex">
             <!-- <h4 class="badge badge-success mb-0">
                 New
             </h4> -->
             <div class="build-num" *ngIf="job.lastBuild">
-                <dt>Last Build:</dt>
-                <dd>#{{job.lastBuild.number}} &nbsp;&nbsp;&nbsp;</dd> 
+              <dl>
+                <dt>Build:</dt>
+                <dd>#{{job.lastBuild.number}} </dd> 
+              </dl>
+              <dl>
                 <dt>On:</dt>
-                <dd>{{job.lastBuild.timestamp | date}}&nbsp;&nbsp;&nbsp;</dd> 
+                <dd>{{job.lastBuild.timestamp | date}}</dd> 
+              </dl>
+              <dl>
                 <dt>Duration:</dt>
-                <dd>{{job.lastBuild.duration}} secs &nbsp;&nbsp;&nbsp;</dd>
+                <dd>{{job.lastBuild.duration}} secs </dd>
+              </dl>
+              <dl>
                 <dt>Result:</dt>
-                <dd>{{job.lastBuild.result}}&nbsp;&nbsp;&nbsp;&nbsp; </dd>
-                <dt *ngIf="nextRunTime">Next Run Time:</dt>
+                <dd class="badge badge-success">{{job.lastBuild.result}}</dd>
+              </dl>
+              <dl *ngIf="nextRunTime">
+                <dt>Next Run Time:</dt>
                 <dd>{{nextRunTime  | date:'medium' }}</dd>
+              </dl>
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="disflex align-right" *ngIf="!currentUser.isReadonly">
-            <button class="btn btn-primary btn-lg" 
-            (click) = "buildJob(job.name)">
-              Build
-            </button>
-        </div> 
           </div>
           
         </div>
+        <div class="disflex align-right" *ngIf="!currentUser.isReadonly">
+          <div class="bg-stat-s">
+              <img src="../../assets/images/{{job.healthReport[0].iconUrl}}" title="Stable" width="32px">
+          </div>
+            <button class="btn btn-primary btn-lg" 
+            (click) = "buildJob(job.name)">
+            <i class="fas fa-hammer mr-2"></i>
+              Build
+            </button>
+        </div> 
       </div>
       <div class="job-body">
-        <div class="row" *ngIf="job.lastSuccessfulBuild">
+        <div class="row tpbor success-builds" *ngIf="job.lastSuccessfulBuild">
           <div class="col">
             <dt>Last Successful Build</dt>
             <dd>{{job.lastSuccessfulBuild.number}}</dd>
@@ -63,7 +76,7 @@
               <dd>{{job.lastSuccessfulBuild.result}}</dd>
           </div>
         </div>
-        <div class="row" *ngIf="job.lastUnsuccessfulBuild">
+        <div class="row tpbor unsuccess-builds" *ngIf="job.lastUnsuccessfulBuild">
             <div class="col">
               <dt>Last UnSuccessful Build</dt>
               <dd>{{job.lastUnsuccessfulBuild.number}}</dd>

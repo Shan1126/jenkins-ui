@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
-import jobsData from '../data/jobs.json';
 
 
 @Component({
@@ -16,6 +15,7 @@ import jobsData from '../data/jobs.json';
 export class DashboardComponent implements OnInit {
   jobs: any = [];
   jobDetails: any = [];
+  filterStr: string;
   nextRunTimes: any = [];
   buildDetails: any = [];
   currentUser: User;
@@ -37,15 +37,12 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllJobs() {
-    // this.appService.getAllJobs().subscribe({
-    //   next: res => {
-    //     this.jobs = res.jobs;
-    //     this.getJobDetails();
-    //   }
-    // })
-    // console.log('Jobs from json file: ' + JSON.stringify(jobsData.jobs));
-    this.jobs = jobsData.jobs;
-
+    this.appService.getJobsData().subscribe({
+      next: res => {
+        this.jobs = res.jobs;
+        this.getJobDetails();
+      }
+    })
   }
 
   getJobDetails() {
@@ -94,6 +91,11 @@ export class DashboardComponent implements OnInit {
     this.appService.getJobsByName(jobName).subscribe((response) => {
       this.jobDetails[index] = response;
     })
+  }
+
+  filterJobs(str) {
+    const newArray = this.jobs.filter(j => j.name === str);
+    this.jobs = newArray;
   }
 
 }

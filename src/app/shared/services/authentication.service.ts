@@ -18,30 +18,17 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        let user = {
-            "firstName": "Mary",
-            "lastName": "Ann",
-            "userId": "amary",
-            "password": "demo1230",
-            "title":"Business Analyst",
-            "isReadonly": false,
-            "token": 'XXXXXXX'
-        }
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-        // return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
-        //     .pipe(map(user => {
-        //         // login successful if there's a jwt token in the response
-        //         if (user && user.token) {
-        //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //             localStorage.setItem('currentUser', JSON.stringify(user));
-        //             // console.log('User: ' + JSON.stringify(user));
-        //             this.currentUserSubject.next(user);
-        //         }
-
-        //         return user;
-        //     }));
+      
+        return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
+            .pipe(map(user => {
+                // login successful if there's a jwt token in the response
+                if (user && user.token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                }
+                return user;
+            }));
     }
 
     logout() {

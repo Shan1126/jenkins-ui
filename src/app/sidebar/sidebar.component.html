@@ -52,14 +52,16 @@
           <span>Projects</span>
         </li>
       </ul>
-      <ul class="mt-2" *ngFor="let job of jobs; let i=index">
-        <li>
-          <a  (click) = "navigateToJob(i)">
-            <i class="fa fa-cube"></i>
-            <span>{{job.name}}</span>
-          </a>
-        </li>
-      </ul>
+      <div class="pjcts-scroll">
+        <ul class="mt-2" *ngFor="let job of jobs; let i=index">
+          <li>
+            <a  (click) = "navigateToJob(i)">
+              <i class="fa fa-cube"></i>
+              <span class="job-elips">{{job.name}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- sidebar-menu  -->
   </div>
