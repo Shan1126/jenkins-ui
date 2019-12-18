@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import 'rxjs/add/observable/of';
 import { User } from "./_models";
-import { map } from "rxjs/operators";
+import { map, catchError, finalize } from "rxjs/operators";
 
 @Injectable()
 export class AppService {
@@ -33,7 +33,7 @@ export class AppService {
     this.job = value;
   }
   buildJob(name) {
-    return this.http.post<any>("/" + name, {});
+    return this.http.post<any>("/build", {name: name, type:'build'});
   }
 
   getJobsData(): Observable<any> {
@@ -47,5 +47,29 @@ export class AppService {
         })
       );
     }
+  }
+
+
+  getJobByUrl(url) {
+    return this.http.get<any>(url+'/api/json')
+    .pipe(map((response : Response) => {
+        return response;   
+    }), catchError((error: Response) =>{
+        return throwError('Something went wrong' + error);      
+    }), finalize(() => {
+    }));
+
+  }
+
+
+  buildJobByUrl(url) {
+    return this.http.post<any>('/'+url+'/build', {})
+    .pipe(map((response : Response) => {
+        return response;   
+    }), catchError((error: Response) =>{
+        return throwError('Something went wrong' + JSON.stringify(error));      
+    }), finalize(() => {
+    }));
+
   }
 }

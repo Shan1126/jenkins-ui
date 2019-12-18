@@ -9,6 +9,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     constructor(private authenticationService: AuthenticationService) {}
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if(!request.url.includes('http')) {
         this.apiUrl = environment.apiUrl + '/api/v1/jenkins/jobs';
         const currentUser = this.authenticationService.currentUserValue;
         const url = request.url;
@@ -29,6 +30,8 @@ export class JwtInterceptor implements HttpInterceptor {
             request = request.clone({
                 url: this.apiUrl +  request.url
             });
+        }
+
         }
         return next.handle(request);
     }

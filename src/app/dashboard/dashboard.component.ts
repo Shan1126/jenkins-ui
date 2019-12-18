@@ -48,15 +48,26 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  getJobDetails1() {
+    this.jobs.jobs.forEach((job, index) => {
+      this.appService.getJobsByName(job.jobUrl).subscribe((response) => {
+        this.jobDetails[index] = response;
+        if (job.builds) this.getBuildDetails(job.jobFullPath, job.builds[0].number, index);
+        this.getNextRunTime(job.name, index);
+      })
+    });
+  }
+
   getJobDetails() {
     this.jobs.jobs.forEach((job, index) => {
-      this.appService.getJobsByName(job.name).subscribe((response) => {
+      this.appService.getJobByUrl(job.jobUrl).subscribe((response) => {
         this.jobDetails[index] = response;
         if (job.builds) this.getBuildDetails(job.name, job.builds[0].number, index);
         this.getNextRunTime(job.name, index);
       })
     });
   }
+  
   getNextRunTime(name, index) {
     this.appService.getNextRunTimes(name).subscribe((response) => {
       if (response && response.nextTime) this.nextRunTimes[index] = response.nextTime;
@@ -87,10 +98,15 @@ export class DashboardComponent implements OnInit {
   buildJob() {
     this.confirmdialogue = false;
     if (!this.currentUser.isReadonly) {
-        this.appService.buildJob(this.jobToBuild).subscribe((response) => {
+        this.appService.buildJobByUrl(this.jobToBuild).subscribe((response) => {
           this.toastr.success('Build has been started successfully!');
         }); 
     }
+    if (!this.currentUser.isReadonly) {
+      this.appService.buildJob(this.jobToBuild).subscribe((response) => {
+        this.toastr.success('Build has been started successfully!');
+      }); 
+  }
   }
   confirmBuild(name) {
     this.confirmdialogue = true;

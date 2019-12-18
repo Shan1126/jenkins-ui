@@ -103,7 +103,7 @@
                  </div>
                 <div class="ml-2">
                     <button class="btn btn-outline-light mr-2" (click)="navigateToJob(i)"><i class="far fa-eye mr-1"></i> View</button>
-                    <button class="btn btn-primary" (click)="confirmBuild(j.name)" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i> Build</button>
+                    <button class="btn btn-primary" (click)="confirmBuild(j.jobFullPath)" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i> Build</button>
                  </div>
                 
              </div>
