@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
+// import jobsData from '../data/jobs.json';
 
 
 @Component({
@@ -18,9 +19,6 @@ export class DashboardComponent implements OnInit {
   nextRunTimes: any = [];
   buildDetails: any = [];
   currentUser: User;
-  p: number = 1;
-  filterStr;
-  jobToBuild;
   confirmdialogue : boolean = false;
   currentUserSubscription: Subscription;
   constructor(private appService: AppService,
@@ -40,16 +38,19 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllJobs() {
-    this.appService.getJobsData().subscribe({
+    this.appService.getAllJobs().subscribe({
       next: res => {
-        this.jobs = res;
+        this.jobs = res.jobs;
         this.getJobDetails();
       }
     })
+    // console.log('Jobs from json file: ' + JSON.stringify(jobsData.jobs));
+    // this.jobs = jobsData.jobs;
+
   }
 
   getJobDetails() {
-    this.jobs.jobs.forEach((job, index) => {
+    this.jobs.forEach((job, index) => {
       this.appService.getJobsByName(job.name).subscribe((response) => {
         this.jobDetails[index] = response;
         if (job.builds) this.getBuildDetails(job.name, job.builds[0].number, index);
@@ -63,7 +64,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   navigateToJob(index) {
-    const job = this.jobs.jobs[index];
+    const job = this.jobs[index];
     this.appService.jobData = job;
     this.router.navigate(["/job-details/" + job.name]);
   }
@@ -84,18 +85,15 @@ export class DashboardComponent implements OnInit {
     this.confirmdialogue = false;
   }
 
-  buildJob() {
-    this.confirmdialogue = false;
-    if (!this.currentUser.isReadonly) {
-        this.appService.buildJob(this.jobToBuild).subscribe((response) => {
-          this.toastr.success('Build has been started successfully!');
-        }); 
-    }
-  }
-  confirmBuild(name) {
+  buildJob(name) {
     this.confirmdialogue = true;
-    this.jobToBuild = name;
-
+    if (!this.currentUser.isReadonly) {
+      if (confirm('Are you sure you want to build?')) {
+        this.appService.buildJob(name).subscribe((response) => {
+          this.toastr.success('Build has been started successfully!');
+        });
+      }
+    }
   }
 
   getSampleJobDetails(jobName, index) {
@@ -104,30 +102,4 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  filterJobs(event) {
-    var str = event.target.value;
-    if(str && str.length >= 1) {
-
-      console.log('Inside: string> 1');
-      const newArray = this.jobs.jobs.filter(j => j.name.includes(str));
-      this.jobs.jobs = newArray;
-    } else {
-      console.log('Inside: else');
-      this.getAllJobs();
-    }
-  }
-
-  filterByKeyword(keyword: string) {
-    const k = keyword.toLowerCase();
-    this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
-    this.jobs.jobs = this.jobs.jobs.filter((category) => {
-        category.products = category.products.filter(
-          (product)=> product.name.toLowerCase().includes(k));
-
-        return category.products.length>0 }
-      );
-    if(this.jobs.jobs.length===0){
-      this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
-    }
-  }
 }

@@ -5,7 +5,7 @@
 @import "assets/css/sidebar";
 
 body{
-    font-family: 'Lato', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
 }
 // tooltips
 .tooltip-example [tooltip] {
@@ -834,8 +834,7 @@ app-sidebar {
 }
 
 .disblock{
-	display: block  !important;
-	margin-top: 70px;
+    display: block  !important;
 }
 
 .page-header{
@@ -914,6 +913,30 @@ app-sidebar {
             }
         }
     }
+}
+
+.w100per{
+	width: 100%;
+}
+
+.disflex{
+	display: flex;
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+	background-color: rgba(0, 0, 0, 0.02);
+}
+
+td{
+	white-space: nowrap;
+	vertical-align: middle !important;
+	min-width: 75px;
+}
+
+td.elipsis{
+	max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1024px) {

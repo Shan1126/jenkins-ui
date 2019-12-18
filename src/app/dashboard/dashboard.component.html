@@ -1,21 +1,21 @@
-<div class="page-header pt50" *ngIf="jobs.jobs">
+<div class="page-header pt50">
     <div class="row m-0 border-btm">
        <div class="col-md-12">
           <h5 class="page-title">Jenkins Jobs - Dashboard</h5>
-          <p>Below are the jobs that you can manage to view build status, check console logs and build them on-demand.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
        </div>
        <div class="col-md-6 text-right">
        </div>
     </div>
     <div>
        <div class="row m-0 pt-3 pb-1">
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-3 col-lg-6">
              <div class="card card-stats mb-3 mb-xl-0">
                 <div class="card-body">
                    <div class="row">
                       <div class="col">
                          <h5 class="card-title text-muted mb-1">No. of Jobs</h5>
-                         <span class="h2 font-weight-bold mb-0">{{jobs.jobs.length}}</span>
+                         <span class="h2 font-weight-bold mb-0">19</span>
                       </div>
                       <div class="col-auto">
                          <div class="icon icon-shape bg-tomato text-white rounded-circle ">
@@ -23,20 +23,20 @@
                          </div>
                       </div>
                    </div>
-                   <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                   <p class="mt-3 mb-0 text-muted text-sm">
                       <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                       <span class="text-nowrap">Since last month</span>
-                   </p> -->
+                   </p>
                 </div>
              </div>
           </div>
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-3 col-lg-6">
              <div class="card card-stats mb-3 mb-xl-0">
                 <div class="card-body">
                    <div class="row">
                       <div class="col">
                          <h5 class="card-title text-muted mb-1">Successful builds</h5>
-                         <span class="h2 font-weight-bold mb-0">{{jobs.successCount}}</span>
+                         <span class="h2 font-weight-bold mb-0">243</span>
                       </div>
                       <div class="col-auto">
                          <div class="icon icon-shape bg-orange text-white rounded-circle ">
@@ -44,20 +44,20 @@
                          </div>
                       </div>
                    </div>
-                   <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                   <p class="mt-3 mb-0 text-muted text-sm">
                       <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
                       <span class="text-nowrap">Since last week</span>
-                   </p> -->
+                   </p>
                 </div>
              </div>
           </div>
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-3 col-lg-6">
              <div class="card card-stats mb-3 mb-xl-0">
                 <div class="card-body">
                    <div class="row">
                       <div class="col">
                          <h5 class="card-title text-muted mb-1">Failures</h5>
-                         <span class="h2 font-weight-bold mb-0">{{jobs.failureCount}}</span>
+                         <span class="h2 font-weight-bold mb-0">4</span>
                       </div>
                       <div class="col-auto">
                          <div class="icon icon-shape bg-yellow text-white rounded-circle ">
@@ -65,24 +65,106 @@
                          </div>
                       </div>
                    </div>
-                   <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                   <p class="mt-3 mb-0 text-muted text-sm">
                       <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
                       <span class="text-nowrap">Since yesterday</span>
-                   </p> -->
+                   </p>
                 </div>
              </div>
           </div>
-          
+          <div class="col-xl-3 col-lg-6">
+             <div class="card card-stats mb-3 mb-xl-0">
+                <div class="card-body">
+                   <div class="row">
+                      <div class="col">
+                         <h5 class="card-title text-muted mb-1">Overall Weather</h5>
+                         <span class="h2 font-weight-bold mb-0">49.65%</span>
+                      </div>
+                      <div class="col-auto">
+                         <div class="icon icon-shape bg-info text-white rounded-circle ">
+                            <i class="fas fa-cloud-sun-rain"></i>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                      <span class="text-nowrap">Since last month</span>
+                   </p>
+                </div>
+             </div>
+          </div>
        </div>
        <hr>
     </div>
     <!-- jobs list -->
-    <div class="row m-0" *ngIf="jobs.jobs">
+    <div class="row m-0" *ngIf="jobs">
        <div class="col-12 mt-3 mb-3">
-          <div class="sec-title pull-left">Your Jenkins jobs</div>
-          
+         
+          <!-- <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active">
+                <span class="page-link">
+                  2
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav> -->
+          <div class="card job-pad w100per">
+             <div class="disflex mb-3">
+                  <div class="sec-title after-line pull-left">All Builds</div>
+                  <div class="input-group input-group-alternative search-place">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text leftrr"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input class="form-control rightrr" placeholder="Search" type="text">
+                  </div>
+               </div>
+            <div class="table-responsive">
+               <table class="table table-striped">
+                  <thead>
+                  <tr>
+                     <th scope="col">Health Status</th>
+                     <th scope="col">Name</th>
+                     <th scope="col">#Last Build</th>
+                     <th scope="col">Last Build On</th>
+                     <th scope="col">Last Build Duration</th>
+                     <th scope="col">Last Build Result</th>
+                     <th scope="col">Next Evaluation</th>
+                     <th scope="col">Actions</th>
+                  </tr>
+                  </thead>
+               <tbody>
+                  <tr *ngFor="let i=index; let j of jobs;">
+                     <td scope="row">
+                        <img src="../../assets/images/{{j.healthReport[0].iconUrl}}" title="Stable" class="mr-2" width="25px">
+                     </td>
+                     <td class="elipsis"><a (click) = "navigateToJob(j.name)">{{j.name}}</a></td>
+                     <td>#{{j.lastSuccessfulBuild.number}} </td>
+                     <td>{{j.lastSuccessfulBuild.timestamp | date}}</td>
+                     <td>{{j.lastSuccessfulBuild.duration}} secs</td>
+                     <td>{{j.lastSuccessfulBuild.result}}</td>
+                     <td><i class="far fa-calendar mr-1"></i>{{nextRunTimes[i] | date:'medium' }}</td>
+                     <td class="disflex">
+                        <button class="btn btn-outline-light mr-2" title="View" (click)="navigateToJob(i)"><i class="far fa-eye"></i></button>
+                        <button class="btn btn-success" (click)="buildJob(j.name)" title="Build" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i></button>
+                     </td>
+                  </tr>
+                  </tbody> 
+               </table>
+            </div>
+         </div>
        </div>
-       <div class="col-md-12 col-lg-12 job-lists" *ngFor="let i=index; let j of jobs.jobs | paginate: { itemsPerPage: 6, currentPage: p }; ">
+      
+       <div class="col-md-12 col-lg-12 job-lists" *ngFor="let i=index; let j of jobs;">
           <div class="card job-pad">
              <div class="job-head">
                 <div class="icon-shape-md" >
@@ -103,7 +185,7 @@
                  </div>
                 <div class="ml-2">
                     <button class="btn btn-outline-light mr-2" (click)="navigateToJob(i)"><i class="far fa-eye mr-1"></i> View</button>
-                    <button class="btn btn-primary" (click)="confirmBuild(j.name)" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i> Build</button>
+                    <button class="btn btn-primary" (click)="buildJob(j.name)" *ngIf="!currentUser.isReadonly"><i class="fas fa-hammer"></i> Build</button>
                  </div>
                 
              </div>
@@ -190,12 +272,6 @@
              </div>
           </div>
        </div>
-       <div *ngIf="!jobs.jobs || jobs.jobs.length === 0" style="width:800px; margin:0 auto;">
-        <h5> No Jobs found.</h5>
-       </div>
-       <pagination-controls (pageChange)="p = $event" *ngIf="jobs.jobs && jobs.jobs.length > 0"></pagination-controls>
-
-
     </div>
 
     <div class="modal disblock" *ngIf="confirmdialogue" id="myModal">
@@ -205,7 +281,7 @@
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title text-center">Confirmation</h4>
-            <button type="button" (click)="confirmdialogue = false" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" (click)="closemodal()" class="close" data-dismiss="modal">&times;</button>
           </div>
           
           <!-- Modal body -->
@@ -215,8 +291,8 @@
           
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="confirmdialogue = false">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="buildJob()">Yes Proceed</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Yes Proceed</button>
           </div>
           
         </div>
