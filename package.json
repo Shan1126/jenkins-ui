@@ -1,5 +1,6 @@
 {
   "name": "jenkins-ui",
+  "author": "Shan Gnanasambandham",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -13,7 +14,6 @@
     "stylelint:fix": "stylelint src/app/*.scss  --fix --syntax scss --config .stylelintrc.json",
     "postinstall": "ng build --prod --build-optimizer"
   },
-  "author": "Shan Gnanasambandham",
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
@@ -31,7 +31,9 @@
     "http": "0.0.0",
     "i": "^0.3.6",
     "ngx-pagination": "^5.0.0",
-    "ngx-toastr": "^8.5.0",
+    "ngx-spinner": "^7.2.0",
+    "ngx-toastr": "^8.10.2",
+    "node-sass": "^4.13.1",
     "npm": "^6.13.2",
     "path": "^0.12.7",
     "prettier": "^1.19.1",
@@ -56,7 +58,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
-    "codelyzer": "~4.5.0",
+    "codelyzer": "^4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",

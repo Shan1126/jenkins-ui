@@ -1,3 +1,4 @@
+import { Secsminutes } from './shared/secsminutes.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { TooltipDirective } from './custom-ui/tooltip.directive';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -25,11 +27,13 @@ import {NgxPaginationModule} from 'ngx-pagination';
     JobDetailsComponent,
     LoginComponent,
     TooltipDirective,
+    Secsminutes
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgxSpinnerModule,
     BrowserModule,
     NgxPaginationModule,
     FormsModule,

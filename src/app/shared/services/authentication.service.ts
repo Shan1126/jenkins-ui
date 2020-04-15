@@ -18,6 +18,14 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
+
+        const user = {
+            firstName:'Shan',
+            lastName: 'G',
+            role: 'admin',
+            title: 'Architect'
+        }
+        localStorage.setItem('currentUser', JSON.stringify(user));
       
         return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
             .pipe(map(user => {
@@ -29,6 +37,8 @@ export class AuthenticationService {
                 }
                 return user;
             }));
+
+       
     }
 
     logout() {

@@ -35,11 +35,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.errorMessage = "Invalid username or password. Please try again!";
+          this.router.navigate(["/login"]);
         }
       );
-
-    this.authenticationService
-      .login(this.model.username, this.model.password) 
-      this.router.navigate(["/"], { relativeTo: this.route });
   }
 }

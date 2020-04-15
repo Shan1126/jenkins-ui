@@ -38,8 +38,8 @@
       </div>
     </div> -->
     <!-- sidebar-search  -->
-    <div class="sidebar-menu" *ngIf="jobs">
-      <ul class="mt-2" >
+    <div class="sidebar-menu" *ngIf="jobs && !currentUser.isReadonly">
+      <ul class="mt-2">
         <li class="sidebar-dropdown">
           <a href="javascript:">
             <i class="fa fa-tachometer-alt"></i>
@@ -47,7 +47,7 @@
           </a>
         </li>
       </ul>
-      <ul class="mt-2">
+      <ul class="mt-2" >
         <li class="header-menu">
           <span>Projects</span>
         </li>

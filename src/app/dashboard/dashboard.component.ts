@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -19,11 +20,13 @@ export class DashboardComponent implements OnInit {
   buildDetails: any = [];
   currentUser: User;
   p: number = 1;
+  showSpinner = false;
   filterStr;
   jobToBuild;
-  confirmdialogue : boolean = false;
+  confirmdialogue: boolean = false;
   currentUserSubscription: Subscription;
   constructor(private appService: AppService,
+    private spinnerService: NgxSpinnerService,
     private toastr: ToastrService, public router: Router,
     private authenticationService: AuthenticationService) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
@@ -40,34 +43,27 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllJobs() {
+    this.spinnerService.show();
     this.appService.getJobsData().subscribe({
       next: res => {
         this.jobs = res;
         this.getJobDetails();
       }
     })
-  }
 
-  getJobDetails1() {
-    this.jobs.jobs.forEach((job, index) => {
-      this.appService.getJobsByName(job.jobUrl).subscribe((response) => {
-        this.jobDetails[index] = response;
-        if (job.builds) this.getBuildDetails(job.jobFullPath, job.builds[0].number, index);
-        this.getNextRunTime(job.name, index);
-      })
-    });
   }
 
   getJobDetails() {
+    this.spinnerService.show();
     this.jobs.jobs.forEach((job, index) => {
-      this.appService.getJobByUrl(job.jobUrl).subscribe((response) => {
+      this.appService.getJobsByName(job.name).subscribe((response) => {
         this.jobDetails[index] = response;
         if (job.builds) this.getBuildDetails(job.name, job.builds[0].number, index);
         this.getNextRunTime(job.name, index);
+        this.spinnerService.hide();
       })
     });
   }
-  
   getNextRunTime(name, index) {
     this.appService.getNextRunTimes(name).subscribe((response) => {
       if (response && response.nextTime) this.nextRunTimes[index] = response.nextTime;
@@ -91,59 +87,25 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  closemodal(){
+  closemodal() {
     this.confirmdialogue = false;
   }
 
   buildJob() {
     this.confirmdialogue = false;
     if (!this.currentUser.isReadonly) {
-        this.appService.buildJobByUrl(this.jobToBuild).subscribe((response) => {
-          this.toastr.success('Build has been started successfully!');
-        }); 
+      this.appService.buildJobByUrl(this.jobToBuild).subscribe((response) => {
+        this.toastr.success('Build has been started successfully!');
+      });
     }
     if (!this.currentUser.isReadonly) {
       this.appService.buildJob(this.jobToBuild).subscribe((response) => {
         this.toastr.success('Build has been started successfully!');
-      }); 
-  }
+      });
+    }
   }
   confirmBuild(name) {
     this.confirmdialogue = true;
     this.jobToBuild = name;
-
-  }
-
-  getSampleJobDetails(jobName, index) {
-    this.appService.getJobsByName(jobName).subscribe((response) => {
-      this.jobDetails[index] = response;
-    })
-  }
-
-  filterJobs(event) {
-    var str = event.target.value;
-    if(str && str.length >= 1) {
-
-      console.log('Inside: string> 1');
-      const newArray = this.jobs.jobs.filter(j => j.name.includes(str));
-      this.jobs.jobs = newArray;
-    } else {
-      console.log('Inside: else');
-      this.getAllJobs();
-    }
-  }
-
-  filterByKeyword(keyword: string) {
-    const k = keyword.toLowerCase();
-    this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
-    this.jobs.jobs = this.jobs.jobs.filter((category) => {
-        category.products = category.products.filter(
-          (product)=> product.name.toLowerCase().includes(k));
-
-        return category.products.length>0 }
-      );
-    if(this.jobs.jobs.length===0){
-      this.jobs.jobs = this.jobs.jobs.map(x => Object.assign({}, x));
-    }
   }
 }

@@ -98,10 +98,8 @@ export class JobDetailsComponent implements OnInit {
   }
 
   getJobDetails() {
-    console.log('Job Uel: '+ this.job.jobUrl);
-    this.appService.getJobByUrl(this.job.jobUrl).subscribe(response => {
+    this.appService.getJobsByName(this.job.name).subscribe(response => {
       this.jobDetails = response;
-      console.log('Job Details --> ' + JSON.stringify(response));
       if (this.jobDetails && this.jobDetails.builds) {
         this.getBuildDetails();
         this.getConsolelog();
@@ -122,6 +120,6 @@ export class JobDetailsComponent implements OnInit {
   getConsolelog() {
     this.appService.getConsoleLog(this.jobName, this.jobDetails.builds[this.counter].number).subscribe(res => {
         this.consoleLog = res.data;
-      });
+    });
   }
 }
