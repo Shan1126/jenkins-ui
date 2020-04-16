@@ -18,5 +18,5 @@ app.get('/*', function(req, res) {
 });
 
 app.listen(8082, () => {
-    console.log(`Jenkins UI running on port 8082`);
+    console.log(`HP2B Jobs Dashboard running on port 8082`);
 });

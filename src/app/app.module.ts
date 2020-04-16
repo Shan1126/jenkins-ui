@@ -17,6 +17,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { TooltipDirective } from './custom-ui/tooltip.directive';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DurationFormatPipe } from './shared/duration-format.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     JobDetailsComponent,
     LoginComponent,
     TooltipDirective,
-    Secsminutes
+    Secsminutes,
+    DurationFormatPipe
   ],
   imports: [
     BrowserModule,
