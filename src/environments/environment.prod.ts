@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://jx-devops-automation.jx.acnhpi.com:8081'
+  apiUrl: 'http://localhost:8000'
 };

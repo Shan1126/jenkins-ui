@@ -54,9 +54,9 @@ export class DashboardComponent implements OnInit {
   }
 
   getJobDetails() {
-    this.spinnerService.show();
     this.jobs.jobs.forEach((job, index) => {
       this.appService.getJobsByName(job.name).subscribe((response) => {
+        this.spinnerService.show();
         this.jobDetails[index] = response;
         if (job.builds) this.getBuildDetails(job.name, job.builds[0].number, index);
         this.getNextRunTime(job.name, index);
