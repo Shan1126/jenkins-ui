@@ -23,6 +23,7 @@
                      <!-- <th scope="col">Last Build #</th> -->
                      <th scope="col">Last Executed Time</th>
                      <th scope="col">Job Duration</th>
+                     <th scope="col">Estimated Time Run</th>
                      <th scope="col" *ngIf="!currentUser.isReadonly">Last Build Result</th>
                      <th scope="col">Next Scheduled Time</th>
                      <th scope="col" *ngIf="!currentUser.isReadonly">Actions</th>
@@ -39,6 +40,7 @@
                      <!-- <td>{{j.lastBuild.number}} </td> -->
                      <td>{{j.lastBuild.timestamp | date: 'medium'}}</td>
                      <td>{{ j.lastBuild.duration / 1000 | durationFormat: 's':'hhmmss'}}</td>
+                     <td>{{ j.lastBuild.estimatedTime}}</td>
                      <td class="{{j.lastBuild.result.toLowerCase()}}-build" *ngIf="!currentUser.isReadonly">{{j.lastBuild.result}}</td>
                      <td><i class="far fa-calendar mr-1" ></i>
                         {{nextRunTimes[i] ? (nextRunTimes[i] | date:'medium') : 'N/A' }}
