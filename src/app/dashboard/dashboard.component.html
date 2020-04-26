@@ -40,7 +40,7 @@
                      <!-- <td>{{j.lastBuild.number}} </td> -->
                      <td>{{j.lastBuild.timestamp | date: 'medium'}}</td>
                      <td>{{ j.lastBuild.duration / 1000 | durationFormat: 's':'hhmmss'}}</td>
-                     <td>{{ j.lastBuild.estimatedTime}}</td>
+                     <td>{{ estimatedRuns[i] ? estimatedRuns[i] : ''}}</td>
                      <td class="{{j.lastBuild.result.toLowerCase()}}-build" *ngIf="!currentUser.isReadonly">{{j.lastBuild.result}}</td>
                      <td><i class="far fa-calendar mr-1" ></i>
                         {{nextRunTimes[i] ? (nextRunTimes[i] | date:'medium') : 'N/A' }}

@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   jobs: any = [];
   jobDetails: any = [];
   nextRunTimes: any = [];
+  estimatedRuns: any = [];
   buildDetails: any = [];
   currentUser: User;
   p: number = 1;
@@ -38,6 +39,7 @@ export class DashboardComponent implements OnInit {
     this.jobs = [];
     this.buildDetails = [];
     this.nextRunTimes = [];
+    this.estimatedRuns = [];
     this.jobDetails = [];
     this.getAllJobs();
   }
@@ -67,6 +69,7 @@ export class DashboardComponent implements OnInit {
   getNextRunTime(name, index) {
     this.appService.getNextRunTimes(name).subscribe((response) => {
       if (response && response.nextTime) this.nextRunTimes[index] = response.nextTime;
+      if (response && response.estimatedRunTime) this.estimatedRuns[index] = response.estimatedRunTime;
     })
   }
   navigateToJob(index) {
