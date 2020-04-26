@@ -6,6 +6,7 @@ import { User } from '../_models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../shared/services';
 import { NgxSpinnerService } from "ngx-spinner";
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   nextRunTimes: any = [];
   estimatedRuns: any = [];
   buildDetails: any = [];
+  displayNames: any = [];
   currentUser: User;
   p: number = 1;
   showSpinner = false;
@@ -40,6 +42,7 @@ export class DashboardComponent implements OnInit {
     this.buildDetails = [];
     this.nextRunTimes = [];
     this.estimatedRuns = [];
+    this.displayNames = [];
     this.jobDetails = [];
     this.getAllJobs();
   }
@@ -70,6 +73,7 @@ export class DashboardComponent implements OnInit {
     this.appService.getNextRunTimes(name).subscribe((response) => {
       if (response && response.nextTime) this.nextRunTimes[index] = response.nextTime;
       if (response && response.estimatedRunTime) this.estimatedRuns[index] = response.estimatedRunTime;
+      if (response && response.displayName) this.displayNames[index] = response.displayName;;
     })
   }
   navigateToJob(index) {

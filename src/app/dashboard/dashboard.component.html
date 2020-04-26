@@ -36,7 +36,7 @@
                      <td scope="row" *ngIf="!currentUser.isReadonly">
                         <img src="../../assets/images/{{j.healthReport[0].iconUrl}}" title="Stable" class="mr-1" width="25px">
                      </td>
-                     <td class="elipsis"><a (click) = "navigateToJob(j.name)">{{j.name}}</a></td>
+                     <td class="elipsis"><a (click) = "navigateToJob(j.name)">{{displayNames[i] ? displayNames[i] : ''}}</a></td>
                      <!-- <td>{{j.lastBuild.number}} </td> -->
                      <td>{{j.lastBuild.timestamp | date: 'medium'}}</td>
                      <td>{{ j.lastBuild.duration / 1000 | durationFormat: 's':'hhmmss'}}</td>
